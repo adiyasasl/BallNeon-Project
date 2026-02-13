@@ -8,10 +8,17 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI scoreText;
 
+    [Header("Objective Goal Components")]
+    [SerializeField]
+    private TextMeshProUGUI objectiveText;
+
     private int score = 0;
-    void Awake()
+    private int currentObjective = -1;
+
+    public void Init()
     {
         scoreText.text = score.ToString();
+        UpdateObjective();
     }
 
     public void IncreaseScore(int scoreValue)
@@ -19,6 +26,7 @@ public class UIManager : MonoBehaviour
         score += scoreValue;
 
         UpdateScore();
+        UpdateObjective();
     }
 
     private void UpdateScore()
@@ -29,5 +37,13 @@ public class UIManager : MonoBehaviour
 
         scoreText.transform.DOScale(transform.localScale * 1.3f, 0.5f).SetEase(Ease.OutBack).SetId(scoreText).OnComplete(() =>
         scoreText.transform.DOScale(Vector3.one, 0.5f));
+    }
+
+    private void UpdateObjective()
+    {
+        if (currentObjective >= GameManager.Instance.LevelRule.ObjectiveGoal) return;
+
+        currentObjective++;
+        objectiveText.text = $"{currentObjective}/{GameManager.Instance.LevelRule.ObjectiveGoal}";
     }
 }

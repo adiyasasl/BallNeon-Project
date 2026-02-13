@@ -39,8 +39,6 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tp = GetComponent<TrajectoryPredictor>();
         powerSlider = FindFirstObjectByType<PowerSlider>();
-
-        Init();
     }
 
     void Update()
@@ -123,11 +121,5 @@ public class Projectile : MonoBehaviour
         {
             tp.drawDebugOnPrediction = false;
         }
-    }
-
-    private void Init()
-    {
-        BaseSpeed = GameManager.Instance.GamePhase.LevelConfig.BaseSpeed;
-        MaxSpeed = GameManager.Instance.GamePhase.LevelConfig.MaxSpeed;
     }
 }

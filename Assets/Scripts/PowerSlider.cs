@@ -17,15 +17,6 @@ public class PowerSlider : MonoBehaviour, IIncreamentable
     void Start()
     {
         slider = GetComponent<Slider>();
-        Init();
-    }
-
-    private void Init()
-    {
-        powerValue = GameManager.Instance.GamePhase.LevelConfig.MaxPowerBar;
-
-        slider.maxValue = powerValue;
-        slider.value = slider.maxValue;
     }
 
     public virtual void DecrementValue(int value)
